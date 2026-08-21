@@ -19,10 +19,14 @@ function Sidebar() {
         params: { username: query },
       });
       setResults(response.data);
-      setDisplayProp("block");
     }, 300);
     return () => clearTimeout(timer);
   }, [query]);
+  useEffect(() => {
+    Array.isArray(results) && results.length !== 0
+      ? setDisplayProp("block")
+      : setDisplayProp("hidden");
+  }, [results]);
   return (
     <div className="bg-gray-800 pt-3 pl-2 pr-2 border-r border-r-gray-500 shadow-xl/30 absolute top-0 bottom-0 w-1/5 min-w-xs flex flex-col items-center">
       <SidebarHeader />
@@ -36,7 +40,7 @@ function Sidebar() {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search or start a new chat"
       />
-      <UsersList display={displayProp} results={results} />
+      <UsersList display={displayProp} results={results} setQuery={setQuery} />
       <ConvList />
     </div>
   );
