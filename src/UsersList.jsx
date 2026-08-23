@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useConversation } from "./context/ConversationContext.jsx";
 import api from "./api/axios";
+import { useAuth } from "./context/AuthContext.jsx";
 
 function UsersList({ display, results = [], setQuery }) {
-  const handleConvCreation = async (id, name) => {
-    const response = await api.post("/conversation/createConversation", {
-      userIds: [id],
-    });
+  const { triggerRefresh, sendConv } = useConversation();
+  const { tokenRef } = useAuth();
+  const handleConvCreation = async (user) => {
     setQuery("");
+    const response = await api.post("/conversation/createConversation", {
+      userIds: [user._id],
+    });
+    const newConv = {
+      _id: response.data.conversation._id,
+      name: user.username,
+      avatar: user.avatar,
+      type: "private",
+    };
+    sendConv(newConv);
+    triggerRefresh();
   };
   return (
     <ul
@@ -18,7 +30,7 @@ function UsersList({ display, results = [], setQuery }) {
             key={index}
             id={user._id}
             className="flex items-center mx-auto text-lg cursor-pointer py-1 px-2 font-bold rounded-sm hover:bg-gray-300 mb-1"
-            onClick={() => handleConvCreation(user._id)}
+            onClick={() => handleConvCreation(user)}
           >
             <img
               src={user.avatar}

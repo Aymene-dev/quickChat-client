@@ -29,10 +29,11 @@ const AuthProvider = ({ children }) => {
         return;
       }
 
-      console.log("ref tok: ", refreshToken);
-
       try {
-        const response = await axios.post("http://localhost:3000/auth/refresh", { refreshToken });
+        const response = await axios.post(
+          "http://localhost:3000/auth/refresh",
+          { refreshToken },
+        );
         const newAccessToken = response.data.accessToken;
         login(newAccessToken);
       } catch (error) {

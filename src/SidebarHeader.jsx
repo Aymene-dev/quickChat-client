@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import appLogo from "./assets/QuickChat_logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { useGroupModal } from "./context/GroupModalContext.jsx";
 import AccountMenu from "./AccountMenu.jsx";
 
 function SidebarHeader() {

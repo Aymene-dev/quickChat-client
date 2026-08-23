@@ -297,8 +297,7 @@ function SignUpForm() {
           <p className="mt-2 mx-auto">
             Already have an account?{" "}
             <a
-              href="#"
-              className="text-blue-500 underline"
+              className="text-blue-500 underline cursor-pointer"
               onClick={() => navigate("/login")}
             >
               Sign in

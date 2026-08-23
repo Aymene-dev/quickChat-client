@@ -7,7 +7,7 @@ import { useAuth } from "./context/AuthContext.jsx";
 import { jwtDecode } from "jwt-decode";
 
 function ConvPanel() {
-  const { conversation, displayProp } = useConversation();
+  const { conversation, displayProp, triggerRefresh } = useConversation();
   const { socket, accessToken } = useAuth();
   const [userId, setUserId] = useState("");
   const [user, setUser] = useState({});
@@ -24,10 +24,11 @@ function ConvPanel() {
   const handleSendMessage = async () => {
     if (message !== "") {
       await api.post("/message/send", {
-        convId: conversation.id,
+        convId: conversation._id,
         content: message,
       });
       setMessage("");
+      triggerRefresh();
     }
   };
 
@@ -47,24 +48,22 @@ function ConvPanel() {
     if (!displayProp) return;
     const fetchMessages = async () => {
       try {
-        console.log(conversation);
-
         const response = await api.get("/message/recover", {
           params: {
-            convId: conversation.id,
+            convId: conversation._id,
           },
         });
         setConversationMessages(response.data);
       } catch (error) {
-        console.log(error);
+        console.log("erreur : ", error.message);
       }
     };
     fetchMessages();
   }, [conversation]);
 
   useEffect(() => {
-    if (!socket || !conversation.id) return;
-    socket.emit("joinConversation", conversation.id);
+    if (!socket || !conversation._id) return;
+    socket.emit("joinConversation", conversation._id);
     socket.on("newMessage", (message) => {
       setConversationMessages((prev) => [...prev, message]);
     });

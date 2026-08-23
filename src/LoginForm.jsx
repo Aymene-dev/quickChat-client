@@ -70,8 +70,7 @@ function LoginForm() {
         <p className="mt-2">
           Don't have an account yet?{" "}
           <a
-            href="#"
-            className="text-blue-500 underline"
+            className="text-blue-500 underline cursor-pointer"
             onClick={() => navigate("/create-account")}
           >
             Sign up

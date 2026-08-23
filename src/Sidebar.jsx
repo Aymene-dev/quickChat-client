@@ -33,7 +33,6 @@ function Sidebar() {
       <input
         type="text"
         className="w-9/10 mt-6 mb-6 bg-gray-300 px-3 py-1 rounded-4xl focus:outline-none"
-        placeholder=""
         value={query}
         name="user_input"
         id="input"

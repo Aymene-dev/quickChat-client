@@ -7,6 +7,8 @@ import { useConversation } from "./context/ConversationContext.jsx";
 
 function ConvList() {
   const [conversations, setConversations] = useState([]);
+  const { sendConv, lastUpdate } = useConversation();
+  const [selectedConv, setSelectedConv] = useState(null);
   useEffect(() => {
     const fetchConversations = async () => {
       try {
@@ -16,7 +18,7 @@ function ConvList() {
         const conversationsList = fetchedConvsInfo.map((conv) => {
           if (conv.type === "group") {
             return {
-              id: conv._id,
+              _id: conv._id,
               name: conv.name,
               avatar: conv.avatar,
               type: "group",
@@ -26,7 +28,7 @@ function ConvList() {
             .map((member) => {
               if (member._convId === conv._id) {
                 return {
-                  id: conv._id,
+                  _id: conv._id,
                   name: member.username,
                   avatar: member.avatar,
                   type: "private",
@@ -43,9 +45,7 @@ function ConvList() {
       }
     };
     fetchConversations();
-  }, []);
-
-  const { sendConv } = useConversation();
+  }, [lastUpdate]);
 
   return (
     <ul className="w-full">
@@ -53,10 +53,12 @@ function ConvList() {
         return (
           <li
             key={index}
-            className="flex items-center mx-auto py-2 px-1 w-full cursor-pointer rounded-md hover:bg-gray-700"
-            id={conv.id}
+            className={`flex items-center mx-auto py-2 px-1 w-full cursor-pointer rounded-md hover:bg-gray-700 
+              ${conv._id === selectedConv ? "bg-gray-700" : "bg-transparent"}`}
+            id={conv._id}
             onClick={() => {
               sendConv(conv);
+              setSelectedConv(conv._id);
             }}
           >
             <img

@@ -5,12 +5,15 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { ConversationProvider } from "./context/ConversationContext.jsx";
+import { GroupModalProvider } from "./context/GroupModalContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AuthProvider>
       <ConversationProvider>
-        <App />
+        <GroupModalProvider>
+          <App />
+        </GroupModalProvider>
       </ConversationProvider>
     </AuthProvider>
   </BrowserRouter>,
