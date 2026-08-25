@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
 import { useConversation } from "./context/ConversationContext.jsx";
 import api from "./api/axios";
-import { useAuth } from "./context/AuthContext.jsx";
 
 function UsersList({ display, results = [], setQuery }) {
   const { triggerRefresh, sendConv } = useConversation();
-  const { tokenRef } = useAuth();
   const handleConvCreation = async (user) => {
     setQuery("");
     const response = await api.post("/conversation/createConversation", {
+      type: "private",
       userIds: [user._id],
     });
     const newConv = {
