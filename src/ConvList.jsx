@@ -15,30 +15,37 @@ function ConvList() {
         const response = await api.get("/conversation/userConvs");
         const fetchedConvsInfo = response.data.convsInfo;
         const fetchedInterlocutors = response.data.interlocutors;
-        const conversationsList = fetchedConvsInfo.map((conv) => {
-          if (conv.type === "group") {
-            return {
-              _id: conv._id,
-              name: conv.name,
-              avatar: conv.avatar,
-              type: "group",
-            };
-          }
-          const interlocutor = fetchedInterlocutors
-            .map((member) => {
-              if (member._convId === conv._id) {
-                return {
-                  _id: conv._id,
-                  name: member.username,
-                  avatar: member.avatar,
-                  type: "private",
-                };
-              } else return null;
-            })
-            .filter(Boolean)
-            .flat();
-          return interlocutor[0];
-        });
+        const conversationsList = await Promise.all(
+          fetchedConvsInfo.map(async (conv) => {
+            const lastMessage = await api.get("/message/last-message", {
+              params: { convId: conv._id },
+            });
+            if (conv.type === "group") {
+              return {
+                _id: conv._id,
+                name: conv.name,
+                avatar: conv.avatar,
+                type: "group",
+                lastMessage,
+              };
+            }
+            const interlocutor = fetchedInterlocutors
+              .map((member) => {
+                if (member._convId === conv._id) {
+                  return {
+                    _id: conv._id,
+                    name: member.username,
+                    avatar: member.avatar,
+                    type: "private",
+                    lastMessage,
+                  };
+                } else return null;
+              })
+              .filter(Boolean)
+              .flat();
+            return interlocutor[0];
+          }),
+        );
         setConversations(conversationsList);
       } catch (error) {
         console.log(error);
@@ -48,7 +55,15 @@ function ConvList() {
   }, [lastUpdate]);
 
   return (
-    <ul className="w-full">
+    <ul
+      className="w-full overflow-y-auto transition-all duration-300
+            [&::-webkit-scrollbar]:w-2 
+            [&::-webkit-scrollbar-track]:bg-transparent 
+            [&::-webkit-scrollbar-thumb]:bg-transparent 
+            [&::-webkit-scrollbar-thumb]:rounded-full 
+            [&::-webkit-scrollbar-button]:hidden
+            hover:[&::-webkit-scrollbar-thumb]:bg-gray-400"
+    >
       {conversations.map((conv, index) => {
         return (
           <li
@@ -74,7 +89,7 @@ function ConvList() {
                 ) : null}
               </p>
               <p className="text-white opacity-70 overflow-hidden">
-                test message
+                {conv.lastMessage.data.content}
               </p>
             </div>
           </li>
