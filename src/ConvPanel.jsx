@@ -66,6 +66,7 @@ function ConvPanel() {
     socket.emit("joinConversation", conversation._id);
     socket.on("newMessage", (message) => {
       setConversationMessages((prev) => [...prev, message]);
+      triggerRefresh();
     });
     return () => {
       socket.off("newMessage");
@@ -78,7 +79,7 @@ function ConvPanel() {
   if (!displayProp) {
     return (
       <div className="absolute top-0 bottom-0 right-0 w-4/5 max-w-[calc(100vw-320px)] px-8 py-3 flex justify-center items-center text-white">
-        Nothing to see here for now
+        Chat with your friends!
       </div>
     );
   }
