@@ -2,15 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import api from "./api/axios.js";
 import { useConversation } from "./context/ConversationContext.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "./context/AuthContext.jsx";
 import { jwtDecode } from "jwt-decode";
+import GroupMenu from "./GroupMenu.jsx";
 
 function ConvPanel() {
   const { conversation, displayProp, triggerRefresh } = useConversation();
   const { socket, accessToken } = useAuth();
+  const [groupMenuDisplay, setGroupMenuDisplay] = useState(false);
   const [userId, setUserId] = useState("");
-  const [user, setUser] = useState({});
   const textAreaRef = useRef(null);
   const [message, setMessage] = useState("");
   const [conversationMessages, setConversationMessages] = useState([]);
@@ -85,13 +87,31 @@ function ConvPanel() {
   }
   return (
     <div className="absolute top-0 bottom-0 right-0 w-4/5 max-w-[calc(100vw-320px)] px-8 py-3 ">
-      <div className="absolute top-0 right-0 left-0 h-20 bg-gray-800 text-white text-xl font-bold shadow-xl flex items-center px-8">
-        <img
-          src={conversation.avatar}
-          className="w-15 h-15 rounded-full mr-5"
-          alt=""
+      <div className="absolute top-0 right-0 left-0 h-20 bg-gray-800 text-white text-xl font-bold shadow-xl flex items-center justify-between px-10">
+        <div className="flex items-center">
+          <img
+            src={conversation.avatar}
+            className="w-15 h-15 rounded-full mr-5"
+            alt=""
+          />
+          {conversation.name}
+        </div>
+        {conversation.type === "group" ? (
+          <FontAwesomeIcon
+            icon={faEllipsisVertical}
+            className="text-white text-3xl cursor-pointer"
+            onClick={() => {
+              setGroupMenuDisplay(!groupMenuDisplay);
+            }}
+          />
+        ) : (
+          <></>
+        )}
+        <GroupMenu
+          display={groupMenuDisplay}
+          setDisplay={setGroupMenuDisplay}
+          role={conversation.role}
         />
-        {conversation.name}
       </div>
       <div className="absolute top-20 bottom-0 right-0 left-0">
         <div className="absolute top-0 bottom-23 right-0 left-0 flex flex-col overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-400 px-8 pt-6">

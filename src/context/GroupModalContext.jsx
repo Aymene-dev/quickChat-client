@@ -4,9 +4,21 @@ const GroupModalContext = createContext(null);
 
 const GroupModalProvider = ({ children }) => {
   const [displayGroupModal, setDisplayGroupModal] = useState(false);
+  const [displayGroupMenuModal, setDisplayGroupMenuModal] = useState(false);
+  const [renderGroupMembers, setRenderGroupMembers] = useState(false);
+  const [renderAddMember, setRenderAddMember] = useState(false);
   return (
     <GroupModalContext.Provider
-      value={{ displayGroupModal, setDisplayGroupModal }}
+      value={{
+        displayGroupModal,
+        setDisplayGroupModal,
+        displayGroupMenuModal,
+        setDisplayGroupMenuModal,
+        renderGroupMembers,
+        setRenderGroupMembers,
+        renderAddMember,
+        setRenderAddMember,
+      }}
     >
       {children}
     </GroupModalContext.Provider>

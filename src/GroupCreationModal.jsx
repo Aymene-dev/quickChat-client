@@ -97,7 +97,7 @@ function GroupCreationModal() {
             setPreviewPic(defaultGroupPicture);
           }}
         />
-        <p className="mt-7 text-3xl font-bold">Create a new group</p>
+        <h1 className="mt-7 text-3xl font-bold">Create a new group</h1>
         <form className="w-4/5 mt-8 h-full flex flex-col">
           <label htmlFor="group-name-input" className="mb-5">
             Group name

@@ -27,6 +27,7 @@ function ConvList() {
                 avatar: conv.avatar,
                 type: "group",
                 lastMessage,
+                role: conv.userRole,
               };
             }
             const interlocutor = fetchedInterlocutors
