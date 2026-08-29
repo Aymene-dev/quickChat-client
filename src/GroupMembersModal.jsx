@@ -23,7 +23,10 @@ function GroupMembersModal() {
         {groupMembers.map((member, index) => {
           return (
             <React.Fragment key={index}>
-              <li key={index} className="mb-5 flex items-center">
+              <li
+                key={index}
+                className={`${index !== 0 ? "pt-3" : ""} flex items-center ${index !== groupMembers.length - 1 ? "border-b pb-3" : ""}`}
+              >
                 <img
                   src={member.avatar}
                   className="w-18 h-18 rounded-full mr-6"
@@ -34,11 +37,6 @@ function GroupMembersModal() {
                   <p className="text-gray-500">{member.role}</p>
                 </div>
               </li>
-              {index !== groupMembers.length - 1 ? (
-                <div className="h-px w-full my-1 mx-auto bg-black opacity-55"></div>
-              ) : (
-                <></>
-              )}
             </React.Fragment>
           );
         })}
