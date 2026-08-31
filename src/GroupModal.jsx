@@ -3,13 +3,19 @@ import { useGroupModal } from "./context/GroupModalContext.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import GroupMembersModal from "./GroupMembersModal.jsx";
+import GroupMemberAddingModal from "./GroupMemberAddingModal.jsx";
+import GroupMemberDelete from "./GroupMemberDelete.jsx";
 
 function GroupModal() {
   const {
     displayGroupMenuModal,
     setDisplayGroupMenuModal,
     renderGroupMembers,
-    setRenderGroupMembers
+    setRenderGroupMembers,
+    renderAddMember,
+    setRenderAddMember,
+    renderDeleteMember,
+    setRenderDeleteMember,
   } = useGroupModal();
 
   return (
@@ -22,10 +28,14 @@ function GroupModal() {
           icon={faXmark}
           onClick={() => {
             setDisplayGroupMenuModal(false);
-            setRenderGroupMembers(false)
+            setRenderGroupMembers(false);
+            setRenderAddMember(false);
+            setRenderDeleteMember(false);
           }}
         />
         {renderGroupMembers ? <GroupMembersModal /> : <></>}
+        {renderAddMember ? <GroupMemberAddingModal /> : <></>}
+        {renderDeleteMember ? <GroupMemberDelete /> : <></>}
       </div>
     </div>
   );

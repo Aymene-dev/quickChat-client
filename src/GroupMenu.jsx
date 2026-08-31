@@ -3,9 +3,10 @@ import { useGroupModal } from "./context/GroupModalContext.jsx";
 
 function GroupMenu({ display, setDisplay, role }) {
   const {
-    displayGroupMenuModal,
     setDisplayGroupMenuModal,
     setRenderGroupMembers,
+    setRenderAddMember,
+    setRenderDeleteMember,
   } = useGroupModal();
   return (
     <div
@@ -25,12 +26,26 @@ function GroupMenu({ display, setDisplay, role }) {
               See group members
             </li>
             <div className="h-px w-full my-1 mx-auto bg-black opacity-75 "></div>
-            <li className="cursor-pointer px-2 rounded-md hover:bg-gray-300">
-              Add a member
+            <li
+              className="cursor-pointer px-2 rounded-md hover:bg-gray-300"
+              onClick={() => {
+                setDisplayGroupMenuModal(true);
+                setRenderAddMember(true);
+                setDisplay(false);
+              }}
+            >
+              Add members
             </li>
             <div className="h-px w-full my-1 mx-auto bg-black opacity-55 "></div>
-            <li className="cursor-pointer px-2 rounded-md hover:bg-gray-300">
-              Delete a member
+            <li
+              className="cursor-pointer px-2 rounded-md hover:bg-gray-300"
+              onClick={() => {
+                setDisplayGroupMenuModal(true);
+                setRenderDeleteMember(true);
+                setDisplay(false);
+              }}
+            >
+              Delete members
             </li>
             <div className="h-px w-full my-1 mx-auto bg-black opacity-75 "></div>
             <li className="cursor-pointer px-2 rounded-md hover:bg-gray-300 text-red-500">

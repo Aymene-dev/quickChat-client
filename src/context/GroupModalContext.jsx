@@ -7,6 +7,7 @@ const GroupModalProvider = ({ children }) => {
   const [displayGroupMenuModal, setDisplayGroupMenuModal] = useState(false);
   const [renderGroupMembers, setRenderGroupMembers] = useState(false);
   const [renderAddMember, setRenderAddMember] = useState(false);
+  const [renderDeleteMember, setRenderDeleteMember] = useState(false);
   return (
     <GroupModalContext.Provider
       value={{
@@ -18,6 +19,8 @@ const GroupModalProvider = ({ children }) => {
         setRenderGroupMembers,
         renderAddMember,
         setRenderAddMember,
+        renderDeleteMember,
+        setRenderDeleteMember,
       }}
     >
       {children}
