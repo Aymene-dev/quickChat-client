@@ -24,3 +24,5 @@ src/assets
 *.njsproj
 *.sln
 *.sw?
+
+.env.production

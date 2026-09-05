@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
 
       try {
         const response = await axios.post(
-          "http://localhost:3000/auth/refresh",
+          `${import.meta.env.VITE_API_URL}/auth/refresh`,
           { refreshToken },
         );
         const newAccessToken = response.data.accessToken;
@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
     const decoded = jwtDecode(token);
     setUserId(decoded.userId);
 
-    const newSocket = io("http://localhost:3000", {
+    const newSocket = io(import.meta.env.VITE_API_URL, {
       auth: { token },
     });
     setSocket(newSocket);
