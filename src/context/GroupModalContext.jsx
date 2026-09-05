@@ -8,6 +8,7 @@ const GroupModalProvider = ({ children }) => {
   const [renderGroupMembers, setRenderGroupMembers] = useState(false);
   const [renderAddMember, setRenderAddMember] = useState(false);
   const [renderDeleteMember, setRenderDeleteMember] = useState(false);
+  const [renderLeaveGroup, setRenderLeaveGroup] = useState(false);
   return (
     <GroupModalContext.Provider
       value={{
@@ -21,6 +22,8 @@ const GroupModalProvider = ({ children }) => {
         setRenderAddMember,
         renderDeleteMember,
         setRenderDeleteMember,
+        renderLeaveGroup,
+        setRenderLeaveGroup,
       }}
     >
       {children}

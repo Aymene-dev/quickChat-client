@@ -18,7 +18,7 @@ const ConversationProvider = ({ children }) => {
 
   return (
     <ConversationContext.Provider
-      value={{ conversation, displayProp, sendConv,lastUpdate, triggerRefresh }}
+      value={{ conversation, displayProp, sendConv,lastUpdate, triggerRefresh, setConversation }}
     >
       {children}
     </ConversationContext.Provider>

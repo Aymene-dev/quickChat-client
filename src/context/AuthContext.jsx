@@ -2,12 +2,14 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import api from "../api/axios.js";
 import axios from "axios";
 import { io } from "socket.io-client";
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(null);
   const [socket, setSocket] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const tokenRef = useRef(null);
 
@@ -51,6 +53,9 @@ const AuthProvider = ({ children }) => {
     tokenRef.current = token;
     setAccessToken(token);
 
+    const decoded = jwtDecode(token);
+    setUserId(decoded.userId);
+
     const newSocket = io("http://localhost:3000", {
       auth: { token },
     });
@@ -67,7 +72,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ accessToken, login, logout, socket, isLoading }}
+      value={{ accessToken, login, logout, socket, isLoading, userId }}
     >
       {children}
     </AuthContext.Provider>

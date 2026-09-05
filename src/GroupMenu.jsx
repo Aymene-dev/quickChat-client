@@ -7,6 +7,7 @@ function GroupMenu({ display, setDisplay, role }) {
     setRenderGroupMembers,
     setRenderAddMember,
     setRenderDeleteMember,
+    setRenderLeaveGroup,
   } = useGroupModal();
   return (
     <div
@@ -67,7 +68,14 @@ function GroupMenu({ display, setDisplay, role }) {
               See group members
             </li>
             <div className="h-px w-full my-1 mx-auto bg-black opacity-75 "></div>
-            <li className="cursor-pointer px-2 rounded-md hover:bg-gray-300 text-red-500">
+            <li
+              className="cursor-pointer px-2 rounded-md hover:bg-gray-300 text-red-500"
+              onClick={() => {
+                setDisplayGroupMenuModal(true);
+                setRenderLeaveGroup(true);
+                setDisplay(false);
+              }}
+            >
               Leave the group
             </li>
           </ul>

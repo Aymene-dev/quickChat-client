@@ -5,6 +5,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import GroupMembersModal from "./GroupMembersModal.jsx";
 import GroupMemberAddingModal from "./GroupMemberAddingModal.jsx";
 import GroupMemberDelete from "./GroupMemberDelete.jsx";
+import LeaveGroupModal from "./LeaveGroupModal.jsx";
 
 function GroupModal() {
   const {
@@ -16,6 +17,8 @@ function GroupModal() {
     setRenderAddMember,
     renderDeleteMember,
     setRenderDeleteMember,
+    renderLeaveGroup,
+    setRenderLeaveGroup,
   } = useGroupModal();
 
   return (
@@ -31,11 +34,13 @@ function GroupModal() {
             setRenderGroupMembers(false);
             setRenderAddMember(false);
             setRenderDeleteMember(false);
+            setRenderLeaveGroup(false);
           }}
         />
         {renderGroupMembers ? <GroupMembersModal /> : <></>}
         {renderAddMember ? <GroupMemberAddingModal /> : <></>}
         {renderDeleteMember ? <GroupMemberDelete /> : <></>}
+        {renderLeaveGroup ? <LeaveGroupModal /> : <></>}
       </div>
     </div>
   );
