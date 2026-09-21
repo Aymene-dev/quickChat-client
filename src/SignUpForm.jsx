@@ -129,9 +129,9 @@ function SignUpForm() {
   const CrossIcon = () => <span className="text-red-500 mr-1">✗</span>;
 
   return (
-    <div className="w-full h-screen bg-blue-950 flex justify-center items-center">
+    <div className="w-full h-screen bg-blue-950 md:flex md:justify-center md:items-center">
       <form
-        className="bg-white py-6 min-h-100 w-4/10 rounded-3xl shadow-2xl relative overflow-hidden"
+        className="bg-white py-6 min-h-screen md:min-h-100 w-full md:w-4/10 md:rounded-3xl shadow-2xl relative overflow-hidden"
         onSubmit={(e) => e.preventDefault()}
       >
         {displayImageForm && (
@@ -156,11 +156,7 @@ function SignUpForm() {
             <input
               type="text"
               id="email-input"
-              className={`block bg-gray-200 px-3 py-2 rounded-4xl mt-3 w-full focus:outline-none border-2 ${
-                emailTouched && !isEmailValid
-                  ? "border-red-500"
-                  : "border-transparent"
-              }`}
+              className={`block bg-gray-200 px-3 py-2 rounded-4xl mt-3 w-full focus:outline-none border-2 ${emailTouched && !isEmailValid ? "border-red-500" : "border-transparent"}`}
               placeholder="Enter your email"
               value={email}
               onChange={(e) => {
@@ -185,12 +181,7 @@ function SignUpForm() {
             <input
               type="text"
               id="username-input"
-              className={`block bg-gray-200 px-3 py-2 rounded-4xl mt-3 w-full focus:outline-none border-2
-                ${
-                  usernameTouched && (!usernameAvailability || username === "")
-                    ? "border-red-500"
-                    : "border-transparent"
-                }`}
+              className={`block bg-gray-200 px-3 py-2 rounded-4xl mt-3 w-full focus:outline-none border-2 ${usernameTouched && (!usernameAvailability || username === "") ? "border-red-500" : "border-transparent"}`}
               placeholder="Choose a username"
               value={username}
               onChange={(e) => {
@@ -220,11 +211,7 @@ function SignUpForm() {
             <input
               type="password"
               id="password-input"
-              className={`block bg-gray-200 px-3 py-2 rounded-4xl mt-3 w-full focus:outline-none border-2 ${
-                passwordTouched && !isPasswordValid
-                  ? "border-red-500"
-                  : "border-transparent"
-              }`}
+              className={`block bg-gray-200 px-3 py-2 rounded-4xl mt-3 w-full focus:outline-none border-2 ${passwordTouched && !isPasswordValid ? "border-red-500" : "border-transparent"}`}
               placeholder="Enter a password"
               value={password}
               onChange={(e) => {
@@ -239,32 +226,32 @@ function SignUpForm() {
                     passwordChecks.length ? "text-green-500" : "text-red-500"
                   }
                 >
-                  {passwordChecks.length ? <CheckIcon /> : <CrossIcon />}
-                  At least 8 characters
+                  {passwordChecks.length ? <CheckIcon /> : <CrossIcon />} At
+                  least 8 characters
                 </li>
                 <li
                   className={
                     passwordChecks.uppercase ? "text-green-500" : "text-red-500"
                   }
                 >
-                  {passwordChecks.uppercase ? <CheckIcon /> : <CrossIcon />}
-                  At least one capital letter
+                  {passwordChecks.uppercase ? <CheckIcon /> : <CrossIcon />} At
+                  least one capital letter
                 </li>
                 <li
                   className={
                     passwordChecks.lowercase ? "text-green-500" : "text-red-500"
                   }
                 >
-                  {passwordChecks.lowercase ? <CheckIcon /> : <CrossIcon />}
-                  At least one small letter
+                  {passwordChecks.lowercase ? <CheckIcon /> : <CrossIcon />} At
+                  least one small letter
                 </li>
                 <li
                   className={
                     passwordChecks.number ? "text-green-500" : "text-red-500"
                   }
                 >
-                  {passwordChecks.number ? <CheckIcon /> : <CrossIcon />}
-                  At least one number
+                  {passwordChecks.number ? <CheckIcon /> : <CrossIcon />} At
+                  least one number
                 </li>
               </ul>
             )}
@@ -275,11 +262,7 @@ function SignUpForm() {
             <input
               type="password"
               id="confirm-password-input"
-              className={`block bg-gray-200 px-3 py-2 rounded-4xl mt-3 w-full focus:outline-none border-2 ${
-                confirmPasswordTouched && !isConfirmPasswordValid
-                  ? "border-red-500"
-                  : "border-transparent"
-              }`}
+              className={`block bg-gray-200 px-3 py-2 rounded-4xl mt-3 w-full focus:outline-none border-2 ${confirmPasswordTouched && !isConfirmPasswordValid ? "border-red-500" : "border-transparent"}`}
               placeholder="Confirm your password"
               value={confirmPassword}
               onChange={(e) => {
@@ -316,7 +299,7 @@ function SignUpForm() {
         >
           <p className="mb-8">Select a profile picture (optional)</p>
           <label htmlFor="pp-input">
-            <div className="relative w-100 h-100 rounded-full overflow-hidden group cursor-pointer">
+            <div className="relative w-60 h-60 md:w-100 md:h-100 rounded-full overflow-hidden group cursor-pointer">
               <img
                 src={previewPic}
                 className="w-full h-full object-cover"

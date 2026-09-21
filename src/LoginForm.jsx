@@ -37,14 +37,14 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full h-screen bg-blue-950 flex justify-center items-center">
+    <div className="w-full h-screen bg-blue-950 md:flex md:justify-center md:items-center">
       <SuccessMessage />
       <form
         onSubmit={handleSubmit}
-        className="flex justify-center items-center bg-white h-1/2 min-h-100 w-4/10 rounded-3xl flex-col shadow-2xl"
+        className="flex justify-center items-center bg-white h-full w-full md:h-1/2 md:min-h-100 md:w-4/10 md:rounded-3xl flex-col shadow-2xl"
       >
-        <h1 className="mb-9 text-3xl font-bold ">Connect to your account</h1>
-        <label className="w-4/5 mb-7">
+        <h1 className="mb-9 text-3xl font-bold">Connect to your account</h1>
+        <label className="w-4/5 md:w-4/5 mb-7">
           Email:
           <input
             type="text"
