@@ -6,13 +6,16 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { ConversationProvider } from "./context/ConversationContext.jsx";
 import { GroupModalProvider } from "./context/GroupModalContext.jsx";
+import { SuccessMessageProvider } from "./context/successMessageContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AuthProvider>
       <ConversationProvider>
         <GroupModalProvider>
-          <App />
+          <SuccessMessageProvider>
+            <App />
+          </SuccessMessageProvider>
         </GroupModalProvider>
       </ConversationProvider>
     </AuthProvider>

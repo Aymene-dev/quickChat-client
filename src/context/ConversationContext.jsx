@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ConversationContext = createContext(null);
 
 const ConversationProvider = ({ children }) => {
-  const [conversation, setConversation] = useState({});
+  const [conversation, setConversation] = useState(null);
   const [displayProp, setDisplayProp] = useState(false);
   const [lastUpdate, setLastUpdate] = useState(null);
 

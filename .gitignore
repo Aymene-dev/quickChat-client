@@ -26,3 +26,5 @@ src/assets
 *.sw?
 
 .env.production
+.vercel
+.env*

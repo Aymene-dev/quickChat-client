@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "./context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
+import SuccessMessage from "./successMessage.jsx";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -37,6 +38,7 @@ function LoginForm() {
 
   return (
     <div className="w-full h-screen bg-blue-950 flex justify-center items-center">
+      <SuccessMessage />
       <form
         onSubmit={handleSubmit}
         className="flex justify-center items-center bg-white h-1/2 min-h-100 w-4/10 rounded-3xl flex-col shadow-2xl"

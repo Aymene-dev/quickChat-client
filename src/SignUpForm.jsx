@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "./api/axios.js";
+import { useSuccessMsg } from "./context/successMessageContext.jsx";
 
 function SignUpForm() {
   const defaultPp =
@@ -19,6 +20,7 @@ function SignUpForm() {
   const [confirmPasswordTouched, setConfirmPasswordTouched] = useState(false);
   const [usernameAvailability, setUsernameAvailability] = useState(true); //true for available username
   const [emailAvailability, setEmailAvailability] = useState(true); //true for available email
+  const { successMsgDisplay, setSuccessMsgDisplay } = useSuccessMsg();
 
   const navigate = useNavigate();
 
@@ -111,12 +113,16 @@ function SignUpForm() {
     const profilePicDb = profilePic
       ? await uploadToCloudinary(profilePic)
       : defaultPp;
-    api.post("http://localhost:3000/auth/register", {
+    const response = await api.post("/auth/register", {
       username,
       email,
       avatar: profilePicDb,
       password,
     });
+    if (response.status === 201) {
+      setSuccessMsgDisplay(true);
+      navigate("/login");
+    }
   };
 
   const CheckIcon = () => <span className="text-green-500 mr-1">✓</span>;
