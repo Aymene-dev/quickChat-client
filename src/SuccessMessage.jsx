@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSuccessMsg } from "./context/successMessageContext.jsx";
+import { useSuccessMsg } from "./context/SuccessMessageContext.jsx";
 
 function SuccessMessage() {
   const [width, setWidth] = useState(100);

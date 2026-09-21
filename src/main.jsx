@@ -6,7 +6,7 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { ConversationProvider } from "./context/ConversationContext.jsx";
 import { GroupModalProvider } from "./context/GroupModalContext.jsx";
-import { SuccessMessageProvider } from "./context/successMessageContext.jsx";
+import { SuccessMessageProvider } from "./context/SuccessMessageContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
