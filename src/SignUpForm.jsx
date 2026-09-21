@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "./api/axios.js";
-import { useSuccessMsg } from "./context/successMessageContext.jsx";
+import { useSuccessMsg } from "./context/SuccessMessageContext.jsx";
 
 function SignUpForm() {
   const defaultPp =

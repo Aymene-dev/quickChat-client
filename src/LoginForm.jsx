@@ -2,7 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "./context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
-import SuccessMessage from "./successMessage.jsx";
+import SuccessMessage from "./SuccessMessage.jsx";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
