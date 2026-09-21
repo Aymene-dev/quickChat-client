@@ -7,11 +7,13 @@ import {
   faArrowRightFromBracket,
   faPeopleGroup,
 } from "@fortawesome/free-solid-svg-icons";
+import { useConversation } from "./context/ConversationContext.jsx";
 
 function AccountMenu({ display, setDisplay }) {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const { displayGroupModal, setDisplayGroupModal } = useGroupModal();
+  const { setConversation } = useConversation();
   return (
     <div
       className={`${display ? "block" : "hidden"} text-lg right-1 top-13 bg-white px-2 py-2 rounded-xl absolute z-10`}
@@ -30,6 +32,7 @@ function AccountMenu({ display, setDisplay }) {
         <li
           className="text-red-500 cursor-pointer px-2 rounded-md hover:bg-gray-300"
           onClick={() => {
+            setConversation(null);
             logout();
             navigate("/login");
           }}

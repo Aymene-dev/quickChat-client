@@ -48,6 +48,7 @@ function ConvPanel() {
 
   useEffect(() => {
     if (!displayProp) return;
+    if (!conversation) return;
     const fetchMessages = async () => {
       try {
         const response = await api.get("/message/recover", {
@@ -64,7 +65,7 @@ function ConvPanel() {
   }, [conversation]);
 
   useEffect(() => {
-    if (!socket || !conversation._id) return;
+    if (!socket || !conversation) return;
     socket.emit("joinConversation", conversation._id);
     socket.on("newMessage", (message) => {
       setConversationMessages((prev) => [...prev, message]);
@@ -78,7 +79,7 @@ function ConvPanel() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [conversationMessages]);
-  if (!displayProp) {
+  if (!displayProp || !conversation) {
     return (
       <div className="absolute top-0 bottom-0 right-0 w-4/5 max-w-[calc(100vw-320px)] px-8 py-3 flex justify-center items-center text-white">
         Chat with your friends!
